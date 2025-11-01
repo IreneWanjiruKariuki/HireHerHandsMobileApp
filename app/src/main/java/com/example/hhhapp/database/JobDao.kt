@@ -20,6 +20,6 @@ interface JobDao {
     @Query("SELECT * FROM Job WHERE worker_id = :workerId")
     suspend fun getJobsByWorker(workerId: Int): List<Job>
 
-    @Query("SELECT * FROM Job WHERE status = 'pending'")
+    @Query("SELECT * FROM Job WHERE job_status = 'pending'")
     suspend fun getPendingJobs(): List<Job>
 }
