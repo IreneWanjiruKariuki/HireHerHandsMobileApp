@@ -1,31 +1,25 @@
 package com.example.hhhapp.ui
 
-import android.animation.LayoutTransition
 import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.lifecycleScope
+import androidx.fragment.app.viewModels
 import com.example.hhhapp.R
-import com.example.hhhapp.database.HireHerHandsDatabase
-import com.example.hhhapp.database.UserDao
 import com.example.hhhapp.databinding.FragmentLoginBinding
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 
 
 class LoginFragment: Fragment(/*R.layout.fragment_login*/) {
     private var _binding: FragmentLoginBinding? = null
     private val binding get() = _binding!!
 
-    //Create room objects - database & dao
-    private lateinit var database: HireHerHandsDatabase
-    private lateinit var userDao: UserDao
+    //viewmodel instance
+    private val userViewModel: UserViewModel by viewModels()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup? , savedInstanceState: Bundle?):
     // Initialize binding object
@@ -37,10 +31,28 @@ class LoginFragment: Fragment(/*R.layout.fragment_login*/) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        //Initialize database + dao
-        database = HireHerHandsDatabase.getDatabase(requireContext())
-        userDao = database.UserDao()
+        //observe LiveData from the vm
+        userViewModel.loggedInUser.observe(viewLifecycleOwner, Observer { user ->
+            if (user != null) {
+                //exists — successful login
+                saveLoginState(user.userId, user.userRole)
 
+                Toast.makeText(requireContext(), "Welcome ${user.userName}!", Toast.LENGTH_SHORT)
+                    .show()
+
+                //navigate to correct dashboard
+                navigateToDashboard(user.userRole)
+
+                clearFields()
+            } else {
+                //login failed
+                Toast.makeText(
+                    requireContext(),
+                    "Invalid email or password",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+        })
 
         //Login button implementation
         binding.loginBtn.setOnClickListener {
@@ -48,28 +60,11 @@ class LoginFragment: Fragment(/*R.layout.fragment_login*/) {
             val password = binding.password.text.toString().trim()
 
             if (email.isEmpty() || password.isEmpty()) {
-                Toast.makeText(requireContext(), "Please fill in all fields", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), "Please fill in all fields", Toast.LENGTH_SHORT)
+                    .show()
                 return@setOnClickListener
-            }
-
-            //login using coroutines
-            viewLifecycleOwner.lifecycleScope.launch { // Launch a coroutine tied to the fragment's lifecycle
-                val user = withContext(Dispatchers.IO) { // Switch the coroutine to a background thread for I/O operations
-                    userDao.login(email, password) // Performs the query to the db
-                }
-
-                if (user != null) {
-                    //Save login state
-                    saveLoginState(user.userId, user.userRole)
-
-                    Toast.makeText(requireContext(), "Welcome ${user.userName}!", Toast.LENGTH_SHORT).show()
-
-                    //Navigate based on role
-                    //navigateToDashboard(user.userRole)
-                    clearFields()
-                } else {
-                    Toast.makeText(requireContext(), "Invalid email or password", Toast.LENGTH_SHORT).show()
-                }
+            } else {
+                userViewModel.loginUser(email, password)
             }
         }
 
@@ -92,7 +87,7 @@ class LoginFragment: Fragment(/*R.layout.fragment_login*/) {
         }
     }
 
-    /*private fun navigateToDashboard(role: String) {
+    private fun navigateToDashboard(role: String) {
         val fragment = when (role.lowercase()) {
             "customer", "client" -> CustomerDashboardFragment()
             "worker" -> WorkerDashboardFragment()
@@ -102,11 +97,11 @@ class LoginFragment: Fragment(/*R.layout.fragment_login*/) {
                 return
             }
         }
-
+        //replace the current frgament with the dashboard
         parentFragmentManager.beginTransaction()
             .replace(R.id.fragmentContainer, fragment)
             .commit()
-    }*/
+    }
 
     private fun clearFields() {
         binding.email.text.clear()

@@ -23,6 +23,9 @@ interface UserDao {
     @Query("SELECT * FROM Users WHERE user_role = 'client'")
     suspend fun getClients(): List<User>
 
+    @Query("SELECT * FROM Users WHERE user_id = :id LIMIT 1")
+    suspend fun getUserById(id: Int): User?
+
     @Update
     suspend fun updateUser (user:User)
 }

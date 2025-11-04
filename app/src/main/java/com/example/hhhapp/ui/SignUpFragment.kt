@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.example.hhhapp.database.HireHerHandsDatabase
 import com.example.hhhapp.database.User
@@ -15,14 +16,14 @@ import com.example.hhhapp.databinding.FragmentSignupBinding
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import kotlin.getValue
 
 class SignUpFragment : Fragment(/*R.layout.fragment_signup*/) {
     private var _binding: FragmentSignupBinding? = null
     private val binding get() = _binding!!
 
-    //Create room objects - database & dao
-    private lateinit var database: HireHerHandsDatabase
-    private lateinit var userDao: UserDao
+    //viewmodel instance
+    private val userViewModel: UserViewModel by viewModels()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup? , savedInstanceState: Bundle?):
     // Initialize binding object
@@ -33,12 +34,21 @@ class SignUpFragment : Fragment(/*R.layout.fragment_signup*/) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        //Initialize database + dao
-        database = HireHerHandsDatabase.getDatabase(requireContext())
-        userDao = database.UserDao()
 
         //Setup role spinner
         setupRoleSpinner()
+
+        //Observe signup result from ViewModel
+        userViewModel.signupResult.observe(viewLifecycleOwner) { message ->
+            //result message
+            Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+
+            //signup successful, go back to login
+            if (message == "Account created successfully!") {
+                clearFields()
+                parentFragmentManager.popBackStack()
+            }
+        }
 
         //Signup button implementation
         binding.signupBtn.setOnClickListener {
@@ -49,14 +59,17 @@ class SignUpFragment : Fragment(/*R.layout.fragment_signup*/) {
 
             //Validate inputs
             if (username.isEmpty() || email.isEmpty() || password.isEmpty()) {
-                Toast.makeText(requireContext(), "Please fill in all fields", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), "Please fill in all fields", Toast.LENGTH_SHORT)
+                    .show()
                 return@setOnClickListener
             }
 
             if (!isValidEmail(email)) {
-                Toast.makeText(requireContext(),
+                Toast.makeText(
+                    requireContext(),
                     "Email must contain letters, numbers, @ and . (e.g., user123@example.com)",
-                    Toast.LENGTH_LONG).show()
+                    Toast.LENGTH_LONG
+                ).show()
                 return@setOnClickListener
             }
 
@@ -66,7 +79,11 @@ class SignUpFragment : Fragment(/*R.layout.fragment_signup*/) {
             }
 
             if (password.length < 6) {
-                Toast.makeText(requireContext(), "Password must be at least 6 characters", Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    requireContext(),
+                    "Password must be at least 6 characters",
+                    Toast.LENGTH_SHORT
+                ).show()
                 return@setOnClickListener
             }
 
@@ -79,37 +96,9 @@ class SignUpFragment : Fragment(/*R.layout.fragment_signup*/) {
                 userPassword = password
             )
 
-            //signup using coroutines
-            viewLifecycleOwner.lifecycleScope.launch { // Launch coroutine
-                try {
-                    //Check if email already exists
-                    val existingUser = withContext(Dispatchers.IO) {
-                        userDao.checkEmailExists(email) // Check if email is already registered
-                    }
-
-                    if (existingUser != null) {
-                        Toast.makeText(requireContext(), "Email already registered", Toast.LENGTH_SHORT).show()
-                        return@launch
-                    }
-
-                    //Insert new user
-                    withContext(Dispatchers.IO) {
-                        userDao.insertUser(newUser) //insert to the db
-                    }
-
-                    Toast.makeText(requireContext(), "Account created successfully!", Toast.LENGTH_SHORT).show()
-
-                    clearFields()
-
-                    //Navigate back to login
-                    parentFragmentManager.popBackStack()
-
-                } catch (e: Exception) {
-                    Toast.makeText(requireContext(), "Error: ${e.message}", Toast.LENGTH_SHORT).show()
-                }
-            }
+            //call the vm to signup
+            userViewModel.signupUser(newUser)
         }
-
         // 4. Back to login button implementation
         binding.goToLoginBtn.setOnClickListener {
             parentFragmentManager.popBackStack()

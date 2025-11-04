@@ -1,5 +1,6 @@
 package com.example.hhhapp.ui
 
+import android.content.Context
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
@@ -28,19 +29,27 @@ class MainActivity: AppCompatActivity() {
         //Insert hardcoded admin on first run
         insertAdminIfNotExists()
 
-        // Load the LoginFragment first when the app starts
-        if (savedInstanceState == null) {
+        //check if usere is already logged in
+        checkLoginState()
+    }
+    private fun checkLoginState() {
+        val sharedPref = getSharedPreferences("HireHerHands", Context.MODE_PRIVATE)
+        val isLoggedIn = sharedPref.getBoolean("isLoggedIn", false)  //check if the person is logged in
+
+        if (isLoggedIn) {
+            //User is already logged in
+            val userRole = sharedPref.getString("userRole", "")
+        } else {
             supportFragmentManager.beginTransaction()
                 .replace(R.id.fragmentContainer, LoginFragment())
                 .commit()
         }
     }
-
     private fun insertAdminIfNotExists() {
         lifecycleScope.launch {
             withContext(Dispatchers.IO) {
                 // Check if admin already exists
-                val adminEmail = "admin@hireherands.com"
+                val adminEmail = "admin@hireherhands.com"
                 val existingAdmin = userDao.checkEmailExists(adminEmail)
 
                 if (existingAdmin == null) {
