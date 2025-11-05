@@ -6,13 +6,14 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "Job")
 data class Job(
-    @PrimaryKey @ColumnInfo (name = "job_id") val jobId: Int,
+    @PrimaryKey(autoGenerate = true) @ColumnInfo (name = "job_id") val jobId: Int = 0,
     @ColumnInfo (name = "job_title") val jobTitle: String,
-    @ColumnInfo (name = "job_description") val jobDescription: Int,
+    @ColumnInfo (name = "job_description") val jobDescription: String,
     @ColumnInfo (name = "job_location") val jobLocation: String,
     @ColumnInfo (name = "job_date") val jobDate: String,
-    @ColumnInfo (name = "job_status") val jobStatus: String,
+    @ColumnInfo (name = "job_status") val jobStatus: String = "PENDING",
     @ColumnInfo(name = "customer_id") val customerId: Int,
-    @ColumnInfo(name = "worker_id") val workerId: Int? //nullable until the worker accepts the job
+    @ColumnInfo(name = "worker_id") val workerId: Int?, //nullable until the worker accepts the job
+    @ColumnInfo (name= "required_skill_id") val requiredSkillId: Int? = null
 
 )

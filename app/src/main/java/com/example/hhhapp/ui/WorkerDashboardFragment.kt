@@ -13,11 +13,12 @@ import com.example.hhhapp.R
 
 class WorkerDashboardFragment : Fragment() {
 
+    //viewmodel instance
+    private val userViewModel: UserViewModel by viewModels()
+
     private var _binding: FragmentWorkerDashboardBinding? = null
     private val binding get() = _binding!!
 
-    //viewmodel instance
-    private val userViewModel: UserViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -46,6 +47,20 @@ class WorkerDashboardFragment : Fragment() {
             }
         }
 
+        /*view Available Jobs button
+        binding.btnViewJobs.setOnClickListener {
+            parentFragmentManager.beginTransaction()
+                .replace(R.id.fragmentContainer, WorkerJobsFragment())
+                .addToBackStack(null)
+                .commit()
+        }
+         */
+
+        //view My Accepted Jobs button
+        binding.btnMyJobs.setOnClickListener {
+            // TODO: Create MyJobsFragment to show worker's accepted jobs
+            Toast.makeText(requireContext(), "My Jobs feature coming soon!", Toast.LENGTH_SHORT).show()
+        }
         //logout button
         binding.btnLogout.setOnClickListener {
             with(sharedPref.edit()) {

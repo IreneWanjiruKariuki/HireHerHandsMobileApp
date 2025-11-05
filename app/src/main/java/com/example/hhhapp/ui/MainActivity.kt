@@ -37,9 +37,21 @@ class MainActivity: AppCompatActivity() {
         val isLoggedIn = sharedPref.getBoolean("isLoggedIn", false)  //check if the person is logged in
 
         if (isLoggedIn) {
-            //User is already logged in
+            // User is already logged in - navigate to appropriate dashboard
             val userRole = sharedPref.getString("userRole", "")
+
+            val fragment = when (userRole?.lowercase()) {
+                "customer", "client" -> CustomerDashboardFragment()
+                "worker" -> WorkerDashboardFragment()
+                "admin" -> AdminDashboardFragment()
+                else -> LoginFragment() // Fallback to login if role is invalid
+            }
+
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.fragmentContainer, fragment)
+                .commit()
         } else {
+            // User not logged in - show login screen
             supportFragmentManager.beginTransaction()
                 .replace(R.id.fragmentContainer, LoginFragment())
                 .commit()

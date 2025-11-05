@@ -45,6 +45,8 @@ dependencies {
     implementation("androidx.activity:activity-ktx:1.9.2")
     implementation("androidx.room:room-runtime:2.8.2")
     implementation("androidx.room:room-ktx:2.8.2")
+    implementation("androidx.cardview:cardview:1.0.0")
+    implementation("androidx.recyclerview:recyclerview:1.3.2")
     implementation(libs.androidx.material3)   // for coroutines support
     kapt("androidx.room:room-compiler:2.8.2")         // code generator for Room
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.8.0")

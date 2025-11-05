@@ -7,7 +7,7 @@ import androidx.room.RoomDatabase
 
 @Database(entities =
     [User ::class, Job ::class, Skills ::class, Ratings ::class, WorkerProfile ::class ],
-    version = 1)
+    version = 2)
 abstract class HireHerHandsDatabase: RoomDatabase() {
 
     //Connect HHHDatabase to the Dao Interface

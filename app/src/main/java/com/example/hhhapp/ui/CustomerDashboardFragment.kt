@@ -40,10 +40,18 @@ class CustomerDashboardFragment : Fragment() {
         // observe the LiveData and update the UI when data arrives
         userViewModel.user.observe(viewLifecycleOwner) { user ->
             if (user != null) {
-                binding.tvWelcome.text = "Welcome, ${user.userName}! (Role: ${user.userRole})"
+                binding.tvWelcome.text = "Welcome, ${user.userName}!"
             }
 
         }
+
+        binding.btnPostJob.setOnClickListener {
+            parentFragmentManager.beginTransaction()
+                .replace(R.id.fragmentContainer, PostJobFragment())
+                .addToBackStack(null)
+                .commit()
+        }
+
 
         //logout button
         binding.btnLogout.setOnClickListener {

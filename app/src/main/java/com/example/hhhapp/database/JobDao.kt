@@ -22,4 +22,10 @@ interface JobDao {
 
     @Query("SELECT * FROM Job WHERE job_status = 'pending'")
     suspend fun getPendingJobs(): List<Job>
+
+    @Query("SELECT * FROM Job WHERE LOWER(job_location) LIKE LOWER(:location)")
+    suspend fun getJobsByLocation(location: String): List<Job>
+
+    @Query("UPDATE Job SET job_status = :newStatus, worker_id = :workerId WHERE job_id = :jobId")
+    suspend fun updateJobStatus(jobId: Int, newStatus: String, workerId: Int?)
 }
