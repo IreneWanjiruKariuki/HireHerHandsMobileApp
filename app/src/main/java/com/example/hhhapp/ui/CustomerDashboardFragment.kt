@@ -41,6 +41,19 @@ class CustomerDashboardFragment : Fragment() {
         userViewModel.user.observe(viewLifecycleOwner) { user ->
             if (user != null) {
                 binding.tvWelcome.text = "Welcome, ${user.userName}!"
+
+                //if user = female they can apply to be a worker
+                if (user.userGender == "Female") {
+                    binding.btnApplyWorker.visibility = View.VISIBLE
+                    binding.btnApplyWorker.setOnClickListener {
+                        parentFragmentManager.beginTransaction()
+                            .replace(R.id.fragmentContainer, ApplyAsWorkerFragment())
+                            .addToBackStack(null)
+                            .commit()
+                    }
+                } else {
+                    binding.btnApplyWorker.visibility = View.GONE
+                }
             }
 
         }

@@ -11,9 +11,12 @@ data class Job(
     @ColumnInfo (name = "job_description") val jobDescription: String,
     @ColumnInfo (name = "job_location") val jobLocation: String,
     @ColumnInfo (name = "job_date") val jobDate: String,
-    @ColumnInfo (name = "job_status") val jobStatus: String = "PENDING",
+    @ColumnInfo(name = "job_budget") val jobBudget: Double,
+    @ColumnInfo (name = "job_status") val jobStatus: String = "PENDING_SELECTION", // PENDING_SELECTION, PENDING_WORKER_APPROVAL, ACCEPTED, ONGOING, COMPLETED, PENDING_PAYMENT, PAID, REJECTED
     @ColumnInfo(name = "customer_id") val customerId: Int,
     @ColumnInfo(name = "worker_id") val workerId: Int?, //nullable until the worker accepts the job
-    @ColumnInfo (name= "required_skill_id") val requiredSkillId: Int? = null
+    @ColumnInfo(name = "skill_id") val skillId: Int, // FK to Skill
+    @ColumnInfo(name = "created_at") val createdAt: Long = System.currentTimeMillis(),
+    @ColumnInfo(name = "updated_at") val updatedAt: Long = System.currentTimeMillis()
 
 )

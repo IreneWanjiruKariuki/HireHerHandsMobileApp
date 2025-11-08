@@ -17,6 +17,9 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import kotlin.getValue
+import android.widget.RadioButton
+import android.widget.RadioGroup
+
 
 class SignUpFragment : Fragment(/*R.layout.fragment_signup*/) {
     private var _binding: FragmentSignupBinding? = null
@@ -35,9 +38,6 @@ class SignUpFragment : Fragment(/*R.layout.fragment_signup*/) {
         super.onViewCreated(view, savedInstanceState)
 
 
-        //Setup role spinner
-        setupRoleSpinner()
-
         //Observe signup result from ViewModel
         userViewModel.signupResult.observe(viewLifecycleOwner) { message ->
             //result message
@@ -55,7 +55,7 @@ class SignUpFragment : Fragment(/*R.layout.fragment_signup*/) {
             val username = binding.username.text.toString().trim()
             val email = binding.email.text.toString().trim()
             val password = binding.password.text.toString().trim()
-            val role = binding.spinnerRole.selectedItem.toString()
+            val selectedGenderId = binding.genderRadioGroup.checkedRadioButtonId
 
             //Validate inputs
             if (username.isEmpty() || email.isEmpty() || password.isEmpty()) {
@@ -73,10 +73,12 @@ class SignUpFragment : Fragment(/*R.layout.fragment_signup*/) {
                 return@setOnClickListener
             }
 
-            if (role == "Select Role") {
-                Toast.makeText(requireContext(), "Please select a role", Toast.LENGTH_SHORT).show()
+            if (selectedGenderId == -1) {
+                Toast.makeText(requireContext(), "Please select a gender", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
+            val gender = requireView().findViewById<RadioButton>(selectedGenderId).text.toString()
+
 
             if (password.length < 6) {
                 Toast.makeText(
@@ -91,9 +93,11 @@ class SignUpFragment : Fragment(/*R.layout.fragment_signup*/) {
             val newUser = User(
                 userId = 0,
                 userName = username,
-                userRole = role.lowercase(),
+                userGender = gender,
                 userEmail = email,
-                userPassword = password
+                userPassword = password,
+                isWorkerPending = false,
+                isWorkerApproved = false
             )
 
             //call the vm to signup
@@ -105,13 +109,6 @@ class SignUpFragment : Fragment(/*R.layout.fragment_signup*/) {
         }
     }
 
-    private fun setupRoleSpinner() {
-        // Choose between customer and worker - Admin is hardcoded
-        val roles = arrayOf("Select Role", "Customer", "Worker")
-        val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, roles)
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        binding.spinnerRole.adapter = adapter
-    }
 
     private fun isValidEmail(email: String): Boolean {
         val emailPattern = "^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$"
@@ -126,7 +123,6 @@ class SignUpFragment : Fragment(/*R.layout.fragment_signup*/) {
         binding.username.text.clear()
         binding.email.text.clear()
         binding.password.text.clear()
-        binding.spinnerRole.setSelection(0)
     }
 
     override fun onDestroyView() {

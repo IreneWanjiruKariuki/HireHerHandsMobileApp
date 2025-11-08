@@ -14,7 +14,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 
 
-class LoginFragment: Fragment(/*R.layout.fragment_login*/) {
+class LoginFragment: Fragment() {
     private var _binding: FragmentLoginBinding? = null
     private val binding get() = _binding!!
 
@@ -32,27 +32,31 @@ class LoginFragment: Fragment(/*R.layout.fragment_login*/) {
         super.onViewCreated(view, savedInstanceState)
 
         //observe LiveData from the vm
-        userViewModel.loggedInUser.observe(viewLifecycleOwner, Observer { user ->
+        userViewModel.loggedInUser.observe(viewLifecycleOwner) { user ->
             if (user != null) {
-                //exists — successful login
-                saveLoginState(user.userId, user.userRole)
+                saveLoginState(user.userId)
 
-                Toast.makeText(requireContext(), "Welcome ${user.userName}!", Toast.LENGTH_SHORT)
-                    .show()
+                Toast.makeText(requireContext(), "Welcome ${user.userName}!", Toast.LENGTH_SHORT).show()
 
-                //navigate to correct dashboard
-                navigateToDashboard(user.userRole)
+                if (user.userEmail == "admin@hireherhands.com") {
+                    parentFragmentManager.beginTransaction()
+                        .replace(R.id.fragmentContainer, AdminDashboardFragment())
+                        .addToBackStack(null)
+                        .commit()
+                } else {
+                    parentFragmentManager.beginTransaction()
+                        .replace(R.id.fragmentContainer, CustomerDashboardFragment())
+                        .addToBackStack(null)
+                        .commit()
+                }
+
 
                 clearFields()
             } else {
-                //login failed
-                Toast.makeText(
-                    requireContext(),
-                    "Invalid email or password",
-                    Toast.LENGTH_SHORT
-                ).show()
+                Toast.makeText(requireContext(), "Invalid email or password", Toast.LENGTH_SHORT).show()
             }
-        })
+        }
+
 
         //Login button implementation
         binding.loginBtn.setOnClickListener {
@@ -77,31 +81,15 @@ class LoginFragment: Fragment(/*R.layout.fragment_login*/) {
         }
     }
 
-    private fun saveLoginState(userId: Int, userRole: String) {
+    private fun saveLoginState(userId: Int) {
         val sharedPref = requireActivity().getSharedPreferences("HireHerHands", Context.MODE_PRIVATE)
         with(sharedPref.edit()) {
             putBoolean("isLoggedIn", true)
             putInt("userId", userId)
-            putString("userRole", userRole)
             apply()
         }
     }
 
-    private fun navigateToDashboard(role: String) {
-        val fragment = when (role.lowercase()) {
-            "customer", "client" -> CustomerDashboardFragment()
-            "worker" -> WorkerDashboardFragment()
-            "admin" -> AdminDashboardFragment()
-            else -> {
-                Toast.makeText(requireContext(), "Unknown role", Toast.LENGTH_SHORT).show()
-                return
-            }
-        }
-        //replace the current frgament with the dashboard
-        parentFragmentManager.beginTransaction()
-            .replace(R.id.fragmentContainer, fragment)
-            .commit()
-    }
 
     private fun clearFields() {
         binding.email.text.clear()

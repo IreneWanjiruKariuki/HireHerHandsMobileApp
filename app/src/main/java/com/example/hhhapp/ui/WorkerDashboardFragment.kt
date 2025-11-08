@@ -41,7 +41,7 @@ class WorkerDashboardFragment : Fragment() {
         //observe LiveData to update UI
         userViewModel.user.observe(viewLifecycleOwner) { user ->
             if (user != null) {
-                binding.tvWelcome.text = "Welcome, ${user.userName}! (Role: ${user.userRole})"
+                binding.tvWelcome.text = "Welcome, ${user.userName}!)"
             } else {
                 binding.tvWelcome.text = "User not found."
             }

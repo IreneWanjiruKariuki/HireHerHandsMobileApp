@@ -17,14 +17,26 @@ interface UserDao {
     @Query("SELECT * FROM Users WHERE user_email = :email LIMIT 1")
     suspend fun checkEmailExists(email: String): User?
 
-    @Query("SELECT * FROM Users WHERE user_role = 'worker'")
-    suspend fun getAllWorkers(): List<User>
-
-    @Query("SELECT * FROM Users WHERE user_role = 'client'")
-    suspend fun getClients(): List<User>
-
     @Query("SELECT * FROM Users WHERE user_id = :id LIMIT 1")
     suspend fun getUserById(id: Int): User?
+
+    @Query("SELECT * FROM Users WHERE user_gender = :gender")
+    suspend fun getUsersByGender(gender: String): List<User>
+
+    @Query("SELECT * FROM Users WHERE is_worker_pending = 1 AND is_worker_approved = 0")
+    suspend fun getPendingWorkerApplications(): List<User>
+
+    @Query("SELECT * FROM Users WHERE is_worker_approved = 1")
+    suspend fun getApprovedWorkers(): List<User>
+
+    @Query("SELECT * FROM Users WHERE is_worker_pending = 0 AND is_worker_approved = 0")
+    suspend fun getRejectedWorkers(): List<User>
+
+    @Query("UPDATE Users SET is_worker_approved = :approved, is_worker_pending = 0 WHERE user_id = :userId")
+    suspend fun updateWorkerApproval(userId: Int, approved: Boolean)
+
+    @Query("UPDATE Users SET is_worker_pending = 1 WHERE user_id = :userId")
+    suspend fun markWorkerApplicationPending(userId: Int)
 
     @Update
     suspend fun updateUser (user:User)

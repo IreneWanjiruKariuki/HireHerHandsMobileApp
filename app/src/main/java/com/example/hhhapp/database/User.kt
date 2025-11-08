@@ -8,8 +8,10 @@ import androidx.room.PrimaryKey
 data class User(
     @PrimaryKey(autoGenerate = true) @ColumnInfo (name = "user_id") val userId:Int,
     @ColumnInfo (name = "user_name") val userName:String,
-    @ColumnInfo (name = "user_role") val userRole:String,
+    @ColumnInfo (name = "user_gender") val userGender: String ,
     @ColumnInfo (name = "user_email") val userEmail: String,
-    @ColumnInfo (name = "user_password") val userPassword:String
+    @ColumnInfo (name = "user_password") val userPassword:String,
+    @ColumnInfo (name = "is_worker_pending") val isWorkerPending :Boolean = false,
+    @ColumnInfo (name = "is_worker_approved") val isWorkerApproved :Boolean = false
 
 )

@@ -69,9 +69,9 @@ class MainActivity: AppCompatActivity() {
                     val admin = User(
                         userId = 0,
                         userName = "Admin",
-                        userRole = "admin",
                         userEmail = adminEmail,
-                        userPassword = "admin123"
+                        userPassword = "admin123",
+                        userGender = "female"
                     )
                     userDao.insertUser(admin)
                 }

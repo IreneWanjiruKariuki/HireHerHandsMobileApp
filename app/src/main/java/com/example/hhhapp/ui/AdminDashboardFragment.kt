@@ -40,7 +40,7 @@ class AdminDashboardFragment : Fragment() {
         //observe LiveData
         userViewModel.user.observe(viewLifecycleOwner) { user ->
             if (user != null) {
-                binding.tvWelcome.text = "Welcome, ${user.userName}! (Role: ${user.userRole})"
+                binding.tvWelcome.text = "Welcome, ${user.userName}!)"
             } else {
                 binding.tvWelcome.text = "User not found."
             }

@@ -6,8 +6,8 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 
 @Database(entities =
-    [User ::class, Job ::class, Skills ::class, Ratings ::class, WorkerProfile ::class ],
-    version = 2)
+    [User ::class, Job ::class, Skills ::class, Ratings ::class, WorkerProfile ::class , WorkerSkillCrossRef::class],
+    version = 5)
 abstract class HireHerHandsDatabase: RoomDatabase() {
 
     //Connect HHHDatabase to the Dao Interface
@@ -16,6 +16,7 @@ abstract class HireHerHandsDatabase: RoomDatabase() {
     abstract fun SkillsDao(): SkillsDao
     abstract fun RatingsDao(): RatingsDao
     abstract fun WorkerProfileDao(): WorkerProfileDao
+    abstract fun WorkerSkillCrossRefDao(): WorkerSkillCrossRefDao
 
     //Creating a singleton instance
     companion object{
@@ -28,7 +29,9 @@ abstract class HireHerHandsDatabase: RoomDatabase() {
                     context.applicationContext,
                     HireHerHandsDatabase::class.java,
                     "hireherhands_database"
-                ).build()
+                )
+                    .fallbackToDestructiveMigration()
+                    .build()
                 INSTANCE = instance
                 instance
             }
