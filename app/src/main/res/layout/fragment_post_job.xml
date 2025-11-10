@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+    <data>
+    </data>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="24dp"
+            android:gravity="center_horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Post a New Job"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="24dp" />
+
+            <EditText
+                android:id="@+id/etJobTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Job Title"
+                android:padding="16dp"
+                android:layout_marginBottom="12dp" />
+
+            <EditText
+                android:id="@+id/etJobDescription"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp"
+                android:gravity="top"
+                android:hint="Job Description"
+                android:minLines="3"
+                android:padding="16dp" />
+
+            <EditText
+                android:id="@+id/etJobLocation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Job Location"
+                android:padding="16dp"
+                android:layout_marginBottom="12dp" />
+
+            <EditText
+                android:id="@+id/etJobDate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Job Date (e.g., 2025-11-05)"
+                android:padding="16dp"
+                android:layout_marginBottom="12dp" />
+
+            <EditText
+                android:id="@+id/etJobBudget"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Job Budget"
+                android:inputType="numberDecimal"
+                android:padding="16dp"
+                android:layout_marginBottom="12dp" />
+
+
+            <Spinner
+                android:id="@+id/spinnerSkill"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="16dp"
+                android:layout_marginBottom="24dp" />
+
+            <Button
+                android:id="@+id/btnPostJob"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Post Job"
+                android:textSize="16sp"
+                android:padding="16dp"
+                android:layout_marginBottom="12dp" />
+
+            <Button
+                android:id="@+id/btnBack"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Back to Dashboard"
+                android:textSize="16sp"
+                android:padding="16dp" />
+
+        </LinearLayout>
+    </ScrollView>
+</layout>

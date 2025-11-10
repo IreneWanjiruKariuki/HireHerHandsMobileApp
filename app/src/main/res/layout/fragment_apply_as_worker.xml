@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+    <data>
+    </data>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="24dp"
+            android:gravity="center_horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Apply as Worker"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="24dp" />
+
+            <EditText
+                android:id="@+id/etWorkerBio"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Short Bio"
+                android:minLines="3"
+                android:gravity="top"
+                android:padding="16dp"
+                android:layout_marginBottom="12dp" />
+
+            <EditText
+                android:id="@+id/etHourlyRate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Hourly Rate"
+                android:inputType="numberDecimal"
+                android:padding="16dp"
+                android:layout_marginBottom="12dp" />
+
+            <EditText
+                android:id="@+id/etExperience"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Years of Experience"
+                android:inputType="number"
+                android:padding="16dp"
+                android:layout_marginBottom="12dp" />
+
+            <EditText
+                android:id="@+id/etLocation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Location"
+                android:padding="16dp"
+                android:layout_marginBottom="12dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Upload ID Picture (for verification)"
+                android:layout_marginBottom="8dp"
+                android:textStyle="bold"/>
+
+            <ImageView
+                android:id="@+id/ivIdPicture"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_marginBottom="12dp"
+                android:scaleType="centerCrop"
+                android:background="@android:color/darker_gray"/>
+
+            <Button
+                android:id="@+id/btnSelectId"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Select ID from Gallery"
+                android:layout_marginBottom="24dp" />
+
+            <Button
+                android:id="@+id/btnSubmitWorker"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Submit Application" />
+
+            <Button
+                android:id="@+id/btnBack"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Back to Dashboard"
+                android:textSize="16sp"
+                android:padding="16dp" />
+
+        </LinearLayout>
+</layout>
