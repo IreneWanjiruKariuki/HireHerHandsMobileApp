@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout>
     <data>
-
     </data>
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:orientation="vertical"
@@ -9,60 +8,110 @@
         android:layout_height="match_parent"
         android:padding="24dp"
         android:gravity="center"
-        android:layout_gravity="center">
+        android:layout_gravity="center"
+        android:background="@color/background">
 
+        <!-- Added headline styling -->
         <TextView
             android:text="Create Account"
             android:textStyle="bold"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:textSize="28sp"
+            android:textColor="@color/foreground"
+            android:layout_marginBottom="8dp"/>
 
+        <!-- Added subtitle -->
+        <TextView
+            android:text="Sign up to get started"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:textColor="@color/text_secondary"
+            android:layout_marginBottom="32dp"/>
+
+        <!-- Username field -->
         <EditText
             android:id="@+id/username"
             android:hint="Full Name"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="56dp"
+            android:background="@drawable/input_background"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:textColor="@color/foreground"
+            android:textColorHint="@color/text_secondary"
+            android:layout_marginBottom="16dp"
+            android:inputType="text"/>
 
+        <!-- Phone number field -->
         <EditText
             android:id="@+id/userPhone"
             android:hint="Phone Number"
             android:inputType="phone"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="56dp"
+            android:background="@drawable/input_background"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:textColor="@color/foreground"
+            android:textColorHint="@color/text_secondary"
+            android:layout_marginBottom="16dp"/>
 
+        <!-- Email field -->
         <EditText
             android:id="@+id/email"
             android:hint="Email"
             android:inputType="textEmailAddress"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="56dp"
+            android:background="@drawable/input_background"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:textColor="@color/foreground"
+            android:textColorHint="@color/text_secondary"
+            android:layout_marginBottom="16dp"/>
 
+        <!-- Password field -->
         <EditText
             android:id="@+id/password"
             android:hint="Password"
             android:inputType="textPassword"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="56dp"
+            android:background="@drawable/input_background"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:textColor="@color/foreground"
+            android:textColorHint="@color/text_secondary"
+            android:layout_marginBottom="24dp"/>
 
+        <!-- Gender label -->
         <TextView
             android:id="@+id/textGenderLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Select Gender:"
-            android:layout_marginTop="16dp"
-            android:textSize="16sp"/>
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="12dp"
+            android:textSize="14sp"
+            android:textColor="@color/foreground"
+            android:textStyle="bold"/>
 
+        <!-- Improved radio group styling and spacing -->
         <RadioGroup
             android:id="@+id/genderRadioGroup"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginTop="8dp">
+            android:layout_marginTop="32dp">
 
             <RadioButton
                 android:id="@+id/radioFemale"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="@color/foreground"
+                android:textSize="14sp"
                 android:text="Female"/>
 
             <RadioButton
@@ -70,22 +119,34 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Male"
-                android:layout_marginStart="16dp"/>
+                android:textSize="14sp"
+                android:textColor="@color/foreground"
+                android:layout_marginStart="24dp"/>
 
         </RadioGroup>
 
-
+        <!-- Sign up button styling -->
         <Button
             android:id="@+id/signupBtn"
             android:text="Sign Up"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="56dp"
+            android:background="@drawable/button_primary"
+            android:textColor="@color/button_text"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="12dp"/>
 
+        <!-- Login button styling -->
         <Button
             android:id="@+id/goToLoginBtn"
             android:text="Back to Login"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="56dp"
+            android:background="@drawable/button_secondary"
+            android:textColor="@color/primary"
+            android:textSize="16sp"
+            android:textStyle="bold"/>
 
     </LinearLayout>
 </layout>
