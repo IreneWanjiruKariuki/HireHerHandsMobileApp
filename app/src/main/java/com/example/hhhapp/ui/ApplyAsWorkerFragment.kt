@@ -14,17 +14,12 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.hhhapp.database.HireHerHandsDatabase
-import com.example.hhhapp.database.WorkerSkillCrossRef
 import com.example.hhhapp.databinding.FragmentApplyAsWorkerBinding
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.CoroutineScope
 
 class ApplyAsWorkerFragment : Fragment() {
 
     private var _binding: FragmentApplyAsWorkerBinding? = null
     private val binding get() = _binding!!
-
 
     private val viewModel: ApplyAsWorkerViewModel by viewModels()
     private val PICK_IMAGE_REQUEST = 101
@@ -42,10 +37,15 @@ class ApplyAsWorkerFragment : Fragment() {
 
         val db = HireHerHandsDatabase.getDatabase(requireContext())
 
-        // iD Picture Selection
+        // ID Picture Selection
         binding.btnSelectId.setOnClickListener {
-            val intent = Intent(Intent.ACTION_PICK)
-            intent.type = "image/*"
+            val intent = Intent(Intent.ACTION_OPEN_DOCUMENT).apply {
+                addCategory(Intent.CATEGORY_OPENABLE)
+                type = "image/*"
+                // Request persistable permission
+                flags = Intent.FLAG_GRANT_READ_URI_PERMISSION or
+                        Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION
+            }
             startActivityForResult(intent, PICK_IMAGE_REQUEST)
         }
 
@@ -103,6 +103,8 @@ class ApplyAsWorkerFragment : Fragment() {
                 Toast.makeText(requireContext(), "Please fill all fields and select ID picture", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
+            // Convert the selected URI to a string here
+            val uriString = viewModel.idPictureUri.toString()
 
             //submit to ViewModel
             viewModel.submitApplication(
@@ -112,7 +114,8 @@ class ApplyAsWorkerFragment : Fragment() {
                 hourlyRate,
                 experience,
                 location,
-                selectedSkills.toList()
+                selectedSkills.toList(),
+                idPictureUri = uriString
             )
         }
 
@@ -131,6 +134,17 @@ class ApplyAsWorkerFragment : Fragment() {
         if (requestCode == PICK_IMAGE_REQUEST && resultCode == Activity.RESULT_OK) {
             val selectedImage: Uri? = data?.data
             if (selectedImage != null) {
+                // CRITICAL FIX: Take persistent URI permission
+                try {
+                    requireContext().contentResolver.takePersistableUriPermission(
+                        selectedImage,
+                        Intent.FLAG_GRANT_READ_URI_PERMISSION
+                    )
+                } catch (e: SecurityException) {
+                    // If persistable permission fails, image might still work temporarily
+                    Toast.makeText(requireContext(), "Note: Image may not persist after restart", Toast.LENGTH_SHORT).show()
+                }
+
                 binding.ivIdPicture.setImageURI(selectedImage)
                 viewModel.idPictureUri = selectedImage
             }
@@ -142,4 +156,3 @@ class ApplyAsWorkerFragment : Fragment() {
         _binding = null
     }
 }
-

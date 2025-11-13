@@ -17,4 +17,6 @@ interface WorkerSkillCrossRefDao {
 
     @Query("SELECT skill_id FROM worker_skill_cross_ref WHERE profile_id = :profileId")
     suspend fun getSkillIdsForProfile(profileId: Int): List<Int>
+
+
 }

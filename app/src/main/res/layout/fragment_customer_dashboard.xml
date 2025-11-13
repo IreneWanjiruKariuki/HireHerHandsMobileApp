@@ -3,48 +3,75 @@
     <data>
 
     </data>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="24dp"
-    android:gravity="center"
-    android:layout_gravity="center">
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/tvWelcome"
-        android:text="Welcome!"
-        android:textSize="24sp"
-        android:layout_marginBottom="32dp"
-        android:textStyle="bold"
-        android:textAlignment="center"/>
-
-    <Button
-        android:id="@+id/btnPostJob"
-        android:text="Post a Job"
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="16sp"
-        android:padding="16dp"
-        android:layout_marginBottom="16dp"/>
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="24dp"
+        android:gravity="center"
+        android:layout_gravity="center">
 
-    <Button
-        android:id="@+id/btnApplyWorker"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Apply as Worker"
-        android:textSize="16sp"
-        android:padding="16dp"
-        android:layout_marginTop="16dp"
-        android:visibility="gone" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tvWelcome"
+            android:text="Welcome!"
+            android:textSize="24sp"
+            android:layout_marginBottom="32dp"
+            android:textStyle="bold"
+            android:textAlignment="center"/>
 
+        <Button
+            android:id="@+id/btnPostJob"
+            android:text="Post a Job"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:padding="16dp"
+            android:layout_marginBottom="16dp"/>
 
-    <Button
-        android:id="@+id/btnLogout"
-        android:text="Logout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
-</LinearLayout>
+        <!-- Worker Status Text (for Pending/Rejected) -->
+        <TextView
+            android:id="@+id/tvWorkerStatus"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Worker Status"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textAlignment="center"
+            android:padding="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            android:visibility="gone" />
+
+        <!-- Apply as Worker Button (for new applications) -->
+        <Button
+            android:id="@+id/btnApplyWorker"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Apply as Worker"
+            android:textSize="16sp"
+            android:padding="16dp"
+            android:layout_marginTop="16dp"
+            android:visibility="gone" />
+
+        <!-- Worker Dashboard Button (for approved workers) -->
+        <Button
+            android:id="@+id/btnWorkerDashboard"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Go to Worker Dashboard"
+            android:textSize="16sp"
+            android:padding="16dp"
+            android:layout_marginTop="16dp"
+            android:backgroundTint="#4CAF50"
+            android:visibility="gone" />
+
+        <Button
+            android:id="@+id/btnLogout"
+            android:text="Logout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"/>
+    </LinearLayout>
 </layout>

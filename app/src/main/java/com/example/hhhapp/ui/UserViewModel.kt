@@ -67,51 +67,6 @@ class UserViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
-    // ------------------------------------------------------------
-    // 🔹 ADMIN WORKER MANAGEMENT
-    // ------------------------------------------------------------
 
-    private val _pendingWorkers = MutableLiveData<List<User>>()
-    val pendingWorkers: LiveData<List<User>> get() = _pendingWorkers
-
-    private val _approvedWorkers = MutableLiveData<List<User>>()
-    val approvedWorkers: LiveData<List<User>> get() = _approvedWorkers
-
-    private val _rejectedWorkers = MutableLiveData<List<User>>()
-    val rejectedWorkers: LiveData<List<User>> get() = _rejectedWorkers
-
-    // Get all pending worker applications
-    fun loadPendingWorkers() {
-        viewModelScope.launch(Dispatchers.IO) {
-            val list = userDao.getPendingWorkerApplications()
-            _pendingWorkers.postValue(list)
-        }
-    }
-
-    // Get all approved workers
-    fun loadApprovedWorkers() {
-        viewModelScope.launch(Dispatchers.IO) {
-            val list = userDao.getApprovedWorkers()
-            _approvedWorkers.postValue(list)
-        }
-    }
-
-    // Get all rejected workers
-    fun loadRejectedWorkers() {
-        viewModelScope.launch(Dispatchers.IO) {
-            val list = userDao.getRejectedWorkers()
-            _rejectedWorkers.postValue(list)
-        }
-    }
-
-    // Approve or reject worker (Admin action)
-    fun updateWorkerApproval(userId: Int, approved: Boolean) {
-        viewModelScope.launch(Dispatchers.IO) {
-            userDao.updateWorkerApproval(userId, approved)
-            // Refresh pending list automatically after update
-            val updatedPending = userDao.getPendingWorkerApplications()
-            _pendingWorkers.postValue(updatedPending)
-        }
-    }
 
 }

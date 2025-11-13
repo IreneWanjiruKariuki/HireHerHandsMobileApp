@@ -111,7 +111,7 @@ class SignUpFragment : Fragment(/*R.layout.fragment_signup*/) {
 
 
     private fun isValidEmail(email: String): Boolean {
-        val emailPattern = "^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$"
+        val emailPattern = "^(?=[A-Za-z0-9._-]+@)(?=.*[A-Za-z])[A-Za-z0-9._-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$"
         val hasLetter = email.any { it.isLetter() }
         val hasNumber = email.any { it.isDigit() }
         val matchesPattern = email.matches(Regex(emailPattern))
