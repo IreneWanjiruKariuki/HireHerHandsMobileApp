@@ -35,17 +35,10 @@ class JobViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
-
-    /*fun postJob(job: Job) {
-        viewModelScope.launch(Dispatchers.IO) {
-            try {
-                jobDao.createJob(job)
-                _message.postValue("Job posted successfully!")
-            } catch (e: Exception) {
-                _message.postValue("Error: ${e.message}")
-            }
-        }
-    }*/
+    // Reset job ID to prevent re-navigation
+    fun resetJobId() {
+        _newJobId.value = null
+    }
 
     //load all jobs for a specific customer
     fun getJobsByCustomer(customerId: Int) {

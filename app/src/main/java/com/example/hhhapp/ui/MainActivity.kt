@@ -7,76 +7,63 @@ import androidx.lifecycle.lifecycleScope
 import com.example.hhhapp.R
 import com.example.hhhapp.database.HireHerHandsDatabase
 import com.example.hhhapp.database.User
-import com.example.hhhapp.database.UserDao
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class MainActivity: AppCompatActivity() {
-
+class MainActivity : AppCompatActivity() {
 
     private lateinit var database: HireHerHandsDatabase
-    private lateinit var userDao: UserDao
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        //Initialize database
         database = HireHerHandsDatabase.getDatabase(this)
-        userDao = database.UserDao()
 
-        //Insert hardcoded admin on first run
+        // Insert hardcoded admin on first run
         insertAdminIfNotExists()
 
-        //check if usere is already logged in
+        // Check login state
         checkLoginState()
     }
-    private fun checkLoginState() {
-        val sharedPref = getSharedPreferences("HireHerHands", Context.MODE_PRIVATE)
-        val isLoggedIn = sharedPref.getBoolean("isLoggedIn", false)  //check if the person is logged in
 
-        if (isLoggedIn) {
-            // User is already logged in - navigate to appropriate dashboard
-            val userRole = sharedPref.getString("userRole", "")
-
-            val fragment = when (userRole?.lowercase()) {
-                "customer", "client" -> CustomerDashboardFragment()
-                "worker" -> WorkerDashboardFragment()
-                "admin" -> AdminDashboardFragment()
-                else -> LoginFragment() // Fallback to login if role is invalid
-            }
-
-            supportFragmentManager.beginTransaction()
-                .replace(R.id.fragmentContainer, fragment)
-                .commit()
-        } else {
-            // User not logged in - show login screen
-            supportFragmentManager.beginTransaction()
-                .replace(R.id.fragmentContainer, LoginFragment())
-                .commit()
-        }
-    }
     private fun insertAdminIfNotExists() {
         lifecycleScope.launch {
             withContext(Dispatchers.IO) {
-                // Check if admin already exists
                 val adminEmail = "admin@hireherhands.com"
-                val existingAdmin = userDao.checkEmailExists(adminEmail)
-
+                val existingAdmin = database.UserDao().checkEmailExists(adminEmail)
                 if (existingAdmin == null) {
-                    // Create hardcoded admin user
                     val admin = User(
                         userId = 0,
                         userName = "Admin",
                         userEmail = adminEmail,
                         userPassword = "admin123",
                         userGender = "female"
+                        // no role field
                     )
-                    userDao.insertUser(admin)
+                    database.UserDao().insertUser(admin)
                 }
             }
         }
     }
 
+    private fun checkLoginState() {
+        val sharedPref = getSharedPreferences("HireHerHands", Context.MODE_PRIVATE)
+        val isLoggedIn = sharedPref.getBoolean("isLoggedIn", false)
+
+        val fragment = if (isLoggedIn) {
+            if (sharedPref.getBoolean("isAdmin", false)) {
+                AdminDashboardFragment()
+            } else {
+                CustomerDashboardFragment()
+            }
+        } else {
+            LoginFragment()
+        }
+
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.fragmentContainer, fragment)
+            .commit()
+    }
 }

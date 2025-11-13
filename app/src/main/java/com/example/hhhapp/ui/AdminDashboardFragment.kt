@@ -37,13 +37,19 @@ class AdminDashboardFragment : Fragment() {
         //load user data from ViewModel
         userViewModel.getUserById(userId)
 
-        //observe LiveData
+        /*observe LiveData
         userViewModel.user.observe(viewLifecycleOwner) { user ->
             if (user != null) {
                 binding.tvWelcome.text = "Welcome, ${user.userName}!)"
             } else {
                 binding.tvWelcome.text = "User not found."
             }
+            }*/
+        binding.btnManageWorkers.setOnClickListener {
+            parentFragmentManager.beginTransaction()
+                .replace(R.id.fragmentContainer, AdminApproveWorkersFragment())
+                .addToBackStack(null)
+                .commit()
         }
 
         //logout button

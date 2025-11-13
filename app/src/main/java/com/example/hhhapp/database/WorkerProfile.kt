@@ -14,5 +14,7 @@ data class WorkerProfile(
     @ColumnInfo(name = "hourly_rate") val hourlyRate: Double = 0.0,
     @ColumnInfo(name = "location") val location: String ,
     @ColumnInfo(name = "experience_years") val experienceYears: Int ,
-    @ColumnInfo(name = "status") val status: String = "Pending" // "Pending", "Approved", or "Rejected"
+    @ColumnInfo(name = "status") val status: String = "Pending", // "Pending", "Approved", or "Rejected"
+    @ColumnInfo(name = "id_picture_uri")  val idPictureUri: String? = null
+
 )

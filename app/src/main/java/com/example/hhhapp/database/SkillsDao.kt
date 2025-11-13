@@ -11,6 +11,10 @@ interface SkillsDao {
     @Insert
     suspend fun insertSkill(skill: Skills)
 
+    @Insert
+    suspend fun insertAll(skills: List<Skills>)
+
+
     @Update
     suspend fun updateSkill(skill: Skills)
 
