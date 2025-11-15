@@ -11,6 +11,13 @@ interface UserDao {
     @Insert
     suspend fun insertUser (user:User)
 
+    @Query("SELECT * FROM Users")
+    suspend fun getAllUsers(): List<User>
+
+    @Query("SELECT * FROM Users WHERE user_id IN " +
+            "(SELECT worker_id FROM WorkerProfile WHERE status = 'Approved')")
+    suspend fun getApprovedWorkers(): List<User>
+
     @Query("SELECT * FROM Users WHERE user_email = :email AND user_password = :password LIMIT 1")
     suspend fun login(email: String, password: String): User?
 
@@ -26,8 +33,8 @@ interface UserDao {
     @Query("SELECT * FROM Users WHERE is_worker_pending = 1 AND is_worker_approved = 0")
     suspend fun getPendingWorkerApplications(): List<User>
 
-    @Query("SELECT * FROM Users WHERE is_worker_approved = 1")
-    suspend fun getApprovedWorkers(): List<User>
+    //@Query("SELECT * FROM Users WHERE is_worker_approved = 1")
+    //suspend fun getApprovedWorkers(): List<User>
 
     @Query("SELECT * FROM Users WHERE is_worker_pending = 0 AND is_worker_approved = 0")
     suspend fun getRejectedWorkers(): List<User>

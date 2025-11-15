@@ -130,6 +130,21 @@ class CustomerDashboardFragment : Fragment() {
                 .commit()
         }
 
+        binding.btnViewMyJobs.setOnClickListener {
+            parentFragmentManager.beginTransaction()
+                .replace(R.id.fragmentContainer, CustomerJobsTabFragment())
+                .addToBackStack(null)
+                .commit()
+        }
+
+        // NEW: My Profile button
+        binding.btnMyProfile.setOnClickListener {
+            parentFragmentManager.beginTransaction()
+                .replace(R.id.fragmentContainer, UserProfileFragment())
+                .addToBackStack(null)
+                .commit()
+        }
+
         binding.btnLogout.setOnClickListener {
             with(sharedPref.edit()) {
                 clear()

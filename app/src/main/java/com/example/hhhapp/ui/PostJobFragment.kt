@@ -26,7 +26,8 @@ class PostJobFragment : Fragment() {
     private val binding get() = _binding!!
 
     private val jobViewModel: JobViewModel by viewModels()
-    private var skillsList: List<Skills> = emptyList() // actual skills from DB
+    private var skillsList: List<Skills> = emptyList()
+    private var selectedSkillId: Int = -1 // Store skill ID when posting
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -57,33 +58,27 @@ class PostJobFragment : Fragment() {
             }
         }
 
-        // Observe job ID once job is posted
+        // Observe job ID and navigate immediately when job is posted
         jobViewModel.newJobId.observe(viewLifecycleOwner) { jobId ->
             if (jobId == null || jobId <= 0) return@observe
-            if (skillsList.isEmpty()) return@observe // wait until skills loaded
 
-            val selectedPosition = binding.spinnerSkill.selectedItemPosition
-            if (selectedPosition == 0) return@observe // "Select Skill"
-
-            val skillId = skillsList[selectedPosition - 1].skillId
+            if (selectedSkillId == -1) {
+                Toast.makeText(requireContext(), "Error: Skill not selected", Toast.LENGTH_SHORT).show()
+                jobViewModel.resetJobId()
+                return@observe
+            }
 
             Log.d(
                 "PostJobFragment",
-                "Navigating to MatchingWorkersFragment | jobId: $jobId, skillId: $skillId"
+                "Navigating to MatchingWorkersFragment | jobId: $jobId, skillId: $selectedSkillId"
             )
 
-            val fragment = MatchingWorkersFragment()
-            fragment.arguments = Bundle().apply {
-                putInt("jobId", jobId.toInt())
-                putInt("skillId", skillId)
-            }
+            // Navigate to matching workers
+            navigateToMatchingWorkers(jobId.toInt(), selectedSkillId)
 
-            parentFragmentManager.beginTransaction()
-                .replace(R.id.fragmentContainer, fragment)
-                .addToBackStack(null)
-                .commit()
-
-            jobViewModel.resetJobId() // prevent re-navigation
+            // Reset to prevent re-navigation
+            jobViewModel.resetJobId()
+            selectedSkillId = -1 // Reset skill ID
         }
 
         // Handle Post Job button click
@@ -117,6 +112,9 @@ class PostJobFragment : Fragment() {
             val sharedPref = requireActivity().getSharedPreferences("HireHerHands", Context.MODE_PRIVATE)
             val customerId = sharedPref.getInt("userId", -1)
 
+            // Store the skill ID for the observer
+            selectedSkillId = skillId
+
             val newJob = Job(
                 jobTitle = title,
                 jobDescription = description,
@@ -129,6 +127,7 @@ class PostJobFragment : Fragment() {
                 skillId = skillId
             )
 
+            // Post the job - navigation will happen in observer
             jobViewModel.postJob(newJob)
             clearFields()
         }
@@ -138,6 +137,19 @@ class PostJobFragment : Fragment() {
         jobViewModel.message.observe(viewLifecycleOwner) {
             Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
         }
+    }
+
+    private fun navigateToMatchingWorkers(jobId: Int, skillId: Int) {
+        val fragment = MatchingWorkersFragment()
+        fragment.arguments = Bundle().apply {
+            putInt("jobId", jobId)
+            putInt("skillId", skillId)
+        }
+
+        parentFragmentManager.beginTransaction()
+            .replace(R.id.fragmentContainer, fragment)
+            .addToBackStack(null)
+            .commit()
     }
 
     private fun clearFields() {

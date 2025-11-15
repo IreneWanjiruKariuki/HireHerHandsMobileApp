@@ -11,6 +11,9 @@ interface JobDao {
     @Insert
     suspend fun createJob (job: Job): Long
 
+    @Query("SELECT * FROM Job")
+    suspend fun getAllJobs(): List<Job>
+
     @Update
     suspend fun updateJob (job: Job)
 

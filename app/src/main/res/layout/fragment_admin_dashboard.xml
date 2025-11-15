@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
-    <data>
-    </data>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:gravity="center"
-        android:padding="16dp">
+        android:gravity="center_horizontal">
 
         <TextView
             android:id="@+id/tvWelcome"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Welcome Admin!"
-            android:gravity="center"
-            android:textSize="20sp"
+            android:text="Welcome, Admin!"
+            android:textSize="24sp"
             android:textStyle="bold"
+            android:layout_marginTop="24dp"
             android:layout_marginBottom="32dp"/>
 
         <Button
@@ -25,17 +25,48 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Review Worker Applications"
-            android:gravity="center"
-            android:padding="12dp"
-            android:layout_marginBottom="16dp"/>
+            android:layout_marginBottom="12dp"
+            android:padding="16dp"/>
+
+        <Button
+            android:id="@+id/btnViewJobs"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="View All Jobs"
+            android:layout_marginBottom="12dp"
+            android:padding="16dp"/>
+
+        <Button
+            android:id="@+id/btnViewClients"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="View All Clients"
+            android:layout_marginBottom="12dp"
+            android:padding="16dp"/>
+
+        <Button
+            android:id="@+id/btnViewWorkers"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="View All Workers"
+            android:layout_marginBottom="12dp"
+            android:padding="16dp"/>
+
+        <Button
+            android:id="@+id/btnManageSkills"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Manage Skills"
+            android:layout_marginBottom="32dp"
+            android:padding="16dp"/>
 
         <Button
             android:id="@+id/btnLogout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Logout"
-            android:gravity="center"
-            android:padding="12dp"/>
+            android:backgroundTint="#F44336"
+            android:padding="16dp"/>
 
     </LinearLayout>
-</layout>
+</ScrollView>

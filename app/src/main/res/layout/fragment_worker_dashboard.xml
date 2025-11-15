@@ -1,47 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
-    <data>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
 
-    </data>
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:gravity="center"
-        android:padding="24dp">
+        android:gravity="center_horizontal">
 
         <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
             android:id="@+id/tvWelcome"
-            android:text="Welcome!"
-            android:textSize="20sp"
-            android:layout_marginBottom="24dp"
-            android:textStyle="bold"/>
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Welcome, Worker!"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="32dp"/>
 
         <Button
             android:id="@+id/btnViewJobs"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="View Available Jobs"
-            android:textSize="16sp"
-            android:padding="16dp"
-            android:layout_marginBottom="16dp"/>
+            android:text="View My Jobs"
+            android:layout_marginBottom="12dp"
+            android:padding="16dp"/>
 
         <Button
-            android:id="@+id/btnMyJobs"
+            android:id="@+id/btnMyProfile"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="My Accepted Jobs"
-            android:textSize="16sp"
-            android:padding="16dp"
-            android:layout_marginBottom="16dp"/>
-
+            android:text="My Worker Profile"
+            android:layout_marginBottom="32dp"
+            android:padding="16dp"/>
 
         <Button
             android:id="@+id/btnLogout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:text="Logout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:backgroundTint="#F44336"
+            android:padding="16dp"/>
+
     </LinearLayout>
-</layout>
+</ScrollView>
