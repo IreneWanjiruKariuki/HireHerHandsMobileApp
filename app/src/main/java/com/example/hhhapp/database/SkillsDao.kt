@@ -1,6 +1,7 @@
 package com.example.hhhapp.database
 
 import androidx.room.Dao
+import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
 import androidx.room.Update
@@ -23,4 +24,10 @@ interface SkillsDao {
 
     @Query("SELECT * FROM skills WHERE skill_id = :id LIMIT 1")
     suspend fun getSkillById(id: Int): Skills?
+
+    @Delete
+    suspend fun deleteSkill(skill: Skills)
+
+    @Query("SELECT * FROM Skills WHERE skill_id IN (:skillIds)")
+    suspend fun getSkillsByIds(skillIds: List<Int>): List<Skills>
 }

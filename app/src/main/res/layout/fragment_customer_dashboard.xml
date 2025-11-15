@@ -30,6 +30,26 @@
             android:padding="16dp"
             android:layout_marginBottom="16dp"/>
 
+        <Button
+            android:id="@+id/btnViewMyJobs"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="View My Jobs"
+            android:textSize="16sp"
+            android:padding="16dp"
+            android:layout_marginBottom="16dp"/>
+
+        <!-- NEW: My Profile Button -->
+        <Button
+            android:id="@+id/btnMyProfile"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="My Profile"
+            android:textSize="16sp"
+            android:padding="16dp"
+            android:backgroundTint="#2196F3"
+            android:layout_marginBottom="16dp"/>
+
         <!-- Worker Status Text (for Pending/Rejected) -->
         <TextView
             android:id="@+id/tvWorkerStatus"
