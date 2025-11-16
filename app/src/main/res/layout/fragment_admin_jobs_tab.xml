@@ -3,30 +3,44 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="16dp">
+    android:padding="16dp"
+    android:background="#F9F9F9">
 
+    <!-- Page Title -->
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="All Jobs"
         android:textSize="24sp"
         android:textStyle="bold"
+        android:layout_marginTop="40dp"
+        android:textColor="#000000"
         android:layout_marginBottom="16dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Manage and track all your job postings"
+        android:textSize="14sp"
+        android:textColor="@color/text_secondary"
+        android:layout_marginBottom="24dp"/>
 
     <!-- Tab Buttons -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
+        android:gravity="center"
         android:layout_marginBottom="16dp">
 
         <Button
             android:id="@+id/btnPending"
-            android:layout_width="0dp"
+            android:layout_width="16dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:background="@drawable/tab_button_background"
             android:text="Pending"
-            android:textSize="11sp"/>
+            android:textSize="12sp" />
 
         <Button
             android:id="@+id/btnAccepted"
@@ -34,29 +48,32 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Active"
-            android:textSize="11sp"
-            android:layout_marginStart="4dp"/>
+            android:textSize="12sp"
+            android:layout_marginStart="4dp"
+            android:background="@drawable/tab_button_background"/>
 
         <Button
             android:id="@+id/btnCompleted"
-            android:layout_width="0dp"
+            android:layout_width="26dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
             android:layout_weight="1"
-            android:text="Completed"
-            android:textSize="11sp"
-            android:layout_marginStart="4dp"/>
+            android:background="@drawable/tab_button_background"
+            android:text="Complete"
+            android:textSize="12sp" />
 
         <Button
             android:id="@+id/btnAll"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
             android:layout_weight="1"
+            android:background="@drawable/tab_button_background"
             android:text="All"
-            android:textSize="11sp"
-            android:layout_marginStart="4dp"/>
+            android:textSize="12sp" />
     </LinearLayout>
 
-    <!-- Jobs Container inside ScrollView -->
+    <!-- Jobs Container -->
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -66,14 +83,19 @@
             android:id="@+id/jobsContainer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"/>
+            android:orientation="vertical">
+        </LinearLayout>
     </ScrollView>
 
+    <!-- Back Button -->
     <Button
         android:id="@+id/btnBack"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Back"/>
-
+        android:text="Back"
+        android:backgroundTint="@drawable/button_secondary"
+        android:textAllCaps="false"
+        android:padding="12dp"
+        android:textColor="#FFFFFF"
+        android:layout_marginTop="16dp"/>
 </LinearLayout>

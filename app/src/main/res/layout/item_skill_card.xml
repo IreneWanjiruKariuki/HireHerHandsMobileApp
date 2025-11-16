@@ -1,56 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<!-- Use MaterialCardView as the root container for a modern card look -->
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    android:padding="16dp"
-    android:background="#FFFFFF"
-    android:elevation="2dp"
+    android:layout_marginHorizontal="16dp"
     android:layout_marginBottom="12dp"
-    android:gravity="center_vertical">
+    app:cardCornerRadius="8dp"
+    app:cardElevation="4dp"
+    app:cardBackgroundColor="?attr/colorSurface"> <!-- Uses theme's surface color -->
 
     <LinearLayout
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:orientation="vertical">
+        android:orientation="horizontal"
+        android:padding="16dp"
+        android:gravity="center_vertical">
 
-        <TextView
-            android:id="@+id/tvSkillName"
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tvSkillName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Skill Name: "
+                android:textAppearance="?attr/textAppearanceSubtitle1" /> <!-- Standard Material Typography -->
+
+            <TextView
+                android:id="@+id/tvSkillId"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="ID: "
+                android:textAppearance="?attr/textAppearanceCaption"
+                android:textColor="?attr/colorOnSurfaceVariant" /> <!-- Softer text color -->
+
+            <TextView
+                android:id="@+id/tvWorkerCount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="Workers: "
+                android:textAppearance="?attr/textAppearanceBody2"
+                android:textColor="?attr/colorPrimary" />
+
+        </LinearLayout>
+
+        <!-- Use MaterialButton for a consistent look -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnDeleteSkill"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Skill Name"
-            android:textStyle="bold"
-            android:textSize="16sp"
-            android:textColor="#000000"/>
-
-        <TextView
-            android:id="@+id/tvSkillId"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:text="ID: "
-            android:textSize="12sp"
-            android:textColor="#666666"/>
-
-        <TextView
-            android:id="@+id/tvWorkerCount"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:text="Workers: "
-            android:textSize="14sp"
-            android:textColor="#2196F3"/>
+            android:text="Delete"
+            app:backgroundTint="?attr/colorError"/>
 
     </LinearLayout>
-
-    <Button
-        android:id="@+id/btnDeleteSkill"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Delete"
-        android:backgroundTint="#F44336"
-        android:textSize="12sp"
-        android:padding="8dp"/>
-
-</LinearLayout>
+</com.google.android.material.card.MaterialCardView>

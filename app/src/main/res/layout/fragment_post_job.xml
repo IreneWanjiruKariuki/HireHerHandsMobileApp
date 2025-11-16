@@ -13,7 +13,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="24dp">
+            android:padding="23dp">
 
             <!-- Header -->
             <TextView
@@ -22,6 +22,7 @@
                 android:text="Post a New Job"
                 android:textSize="28sp"
                 android:textStyle="bold"
+                android:layout_marginTop="40dp"
                 android:textColor="@color/text_primary"
                 android:layout_marginBottom="8dp" />
 

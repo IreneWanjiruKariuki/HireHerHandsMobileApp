@@ -2,67 +2,95 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp">
+    android:background="@color/background">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:padding="24dp">
 
+        <!-- header -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Edit Profile"
-            android:textSize="24sp"
+            android:textSize="28sp"
             android:textStyle="bold"
+            android:layout_marginTop="70dp"
+            android:textColor="@color/text_primary"
+            android:layout_marginBottom="8dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Update your profile information"
+            android:textSize="14sp"
+            android:textColor="@color/text_secondary"
             android:layout_marginBottom="24dp"/>
 
+        <!-- Name Section -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Name"
             android:textSize="16sp"
             android:textStyle="bold"
+            android:textColor="@color/text_primary"
             android:layout_marginTop="8dp"/>
 
         <EditText
             android:id="@+id/etName"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="56dp"
             android:hint="Enter your name"
             android:inputType="textPersonName"
-            android:padding="12dp"/>
+            android:background="@drawable/input_background"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:textSize="16sp"
+            android:textColor="@color/text_primary"
+            android:layout_marginBottom="20dp"/>
 
+        <!-- Email Section -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Email"
-            android:textSize="16sp"
+            android:textSize="14sp"
             android:textStyle="bold"
-            android:layout_marginTop="16dp"/>
+            android:textColor="@color/text_primary"
+            android:layout_marginTop="8dp"/>
 
         <EditText
             android:id="@+id/etEmail"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="56dp"
             android:hint="Enter your email"
             android:inputType="textEmailAddress"
-            android:padding="12dp"/>
+            android:background="@drawable/input_background"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:textSize="16sp"
+            android:textColor="@color/text_primary"
+            android:layout_marginBottom="20dp"/>
 
+        <!-- Gender Section -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Gender"
-            android:textSize="16sp"
+            android:textSize="14sp"
             android:textStyle="bold"
-            android:layout_marginTop="16dp"/>
+            android:textColor="@color/text_primary"
+            android:layout_marginTop="12dp"/>
 
         <RadioGroup
             android:id="@+id/rgGender"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:padding="8dp">
+            android:padding="24dp">
 
             <RadioButton
                 android:id="@+id/rbMale"
@@ -70,7 +98,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Male"
-                android:textSize="16sp"/>
+                android:textSize="14sp"
+                android:textColor="@color/text_primary"/>
 
             <RadioButton
                 android:id="@+id/rbFemale"
@@ -78,67 +107,85 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Female"
-                android:textSize="16sp"/>
+                android:textSize="14sp"
+                android:textColor="@color/text_primary"/>
 
         </RadioGroup>
 
+        <!-- Password Section -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Change Password (Optional)"
-            android:textSize="16sp"
+            android:textSize="14sp"
             android:textStyle="bold"
-            android:layout_marginTop="16dp"/>
+            android:textColor="@color/text_primary"
+            android:layout_marginTop="8dp"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Leave blank to keep current password"
             android:textSize="12sp"
-            android:textColor="#666666"
-            android:layout_marginBottom="8dp"/>
+            android:textColor="@color/text_secondary"
+            android:layout_marginBottom="12dp"/>
 
         <EditText
             android:id="@+id/etPassword"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="56dp"
             android:hint="New password (min 6 characters)"
             android:inputType="textPassword"
-            android:padding="12dp"/>
+            android:background="@drawable/input_background"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:textSize="16sp"
+            android:textColor="@color/text_primary"
+            android:layout_marginBottom="12dp"/>
 
         <EditText
             android:id="@+id/etConfirmPassword"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="56dp"
             android:hint="Confirm new password"
             android:inputType="textPassword"
-            android:padding="12dp"
-            android:layout_marginTop="8dp"/>
+            android:background="@drawable/input_background"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:textSize="16sp"
+            android:textColor="@color/text_primary"
+            android:layout_marginBottom="32dp"/>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:orientation="horizontal">
+            android:spacing="12dp"
+            android:orientation="vertical"
+            android:gravity="center_horizontal">
 
             <Button
                 android:id="@+id/btnSave"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
                 android:layout_weight="1"
                 android:text="Save Changes"
-                android:backgroundTint="#4CAF50"
-                android:padding="16dp"/>
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColor="@color/button_text"
+                android:background="@drawable/button_primary"
+
+                android:layout_marginBottom="12dp"/>
 
             <Button
                 android:id="@+id/btnCancel"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:layout_height="56dp"
                 android:layout_weight="1"
-                android:layout_marginStart="8dp"
                 android:text="Cancel"
-                android:backgroundTint="#757575"
-                android:padding="16dp"/>
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColor="@color/text_primary"
+                android:background="@drawable/button_secondary"/>
 
         </LinearLayout>
 

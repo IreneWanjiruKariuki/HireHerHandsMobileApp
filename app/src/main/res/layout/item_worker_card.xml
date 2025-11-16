@@ -4,11 +4,10 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:padding="16dp"
-    android:background="@android:color/white"
-    android:elevation="3dp"
-    android:layout_marginBottom="12dp"
-    android:layout_marginHorizontal="4dp"
-    android:backgroundTint="#F2F2F2">
+    android:background="@drawable/rounded_card"
+    android:elevation="4dp"
+    android:layout_marginBottom="16dp"
+    android:layout_marginHorizontal="8dp">
 
     <TextView
         android:id="@+id/tvWorkerName"
@@ -17,46 +16,53 @@
         android:text="Worker Name"
         android:textStyle="bold"
         android:textSize="18sp"
-        android:layout_marginBottom="4dp" />
+        android:layout_marginBottom="6dp" />
 
     <TextView
         android:id="@+id/workerBio"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Bio"
-        android:layout_marginBottom="4dp" />
+        android:textSize="14sp"
+        android:layout_marginBottom="6dp" />
 
     <TextView
         android:id="@+id/location"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Location"
-        android:layout_marginBottom="4dp" />
+        android:textSize="14sp"
+        android:layout_marginBottom="6dp" />
 
     <TextView
         android:id="@+id/HourlyRate"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Hourly Rate: "
-        android:layout_marginBottom="4dp" />
+        android:text="Hourly Rate:"
+        android:textSize="14sp"
+        android:layout_marginBottom="6dp" />
 
     <TextView
         android:id="@+id/experienceYears"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Experience: "
-        android:layout_marginBottom="4dp" />
+        android:textSize="14sp"
+        android:layout_marginBottom="6dp" />
 
     <TextView
         android:id="@+id/averageRating"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Rating: 0.0"
-        android:layout_marginBottom="8dp" />
+        android:text="Rating: "
+        android:textSize="14sp"
+        android:layout_marginBottom="12dp" />
 
     <Button
         android:id="@+id/btnSelectWorker"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Select Worker" />
+        android:layout_height="48dp"
+        android:text="Select Worker"
+        android:background="@drawable/button_primary" />
+
 </LinearLayout>

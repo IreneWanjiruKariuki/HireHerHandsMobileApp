@@ -2,7 +2,8 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp">
+    android:padding="24dp"
+    android:background="@color/background">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -10,13 +11,23 @@
         android:orientation="vertical"
         android:gravity="center_horizontal">
 
+        <!-- header -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="My Profile"
-            android:textSize="24sp"
+            android:textSize="32sp"
             android:textStyle="bold"
-            android:layout_marginTop="24dp"
+            android:textColor="@color/text_primary"
+            android:layout_marginTop="70dp"
+            android:layout_marginBottom="8dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="View and manage your account details"
+            android:textSize="14sp"
+            android:textColor="@color/text_secondary"
             android:layout_marginBottom="32dp"/>
 
         <!-- Profile Card -->
@@ -24,61 +35,81 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:background="#FFFFFF"
+            android:background="@drawable/card_background"
             android:elevation="4dp"
-            android:padding="20dp"
+            android:padding="24dp"
             android:layout_marginBottom="24dp">
 
+            <!-- Name Section -->
             <TextView
                 android:id="@+id/tvUserName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Name: "
                 android:textSize="18sp"
-                android:textStyle="bold"
-                android:layout_marginBottom="12dp"/>
+                android:textColor="@color/text_primary"
+                android:layout_marginBottom="16dp"/>
 
+            <!-- Email Section -->
             <TextView
                 android:id="@+id/tvUserEmail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Email: "
                 android:textSize="16sp"
-                android:layout_marginBottom="12dp"/>
+                android:textColor="@color/text_primary"
+                android:layout_marginBottom="16dp"/>
 
+            <!-- Gender Section -->
             <TextView
                 android:id="@+id/tvUserGender"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Gender: "
                 android:textSize="16sp"
-                android:layout_marginBottom="12dp"/>
+                android:textColor="@color/text_primary"
+                android:layout_marginBottom="16dp"/>
 
+            <!-- User ID Section -->
             <TextView
                 android:id="@+id/tvUserId"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="User ID: "
                 android:textSize="14sp"
-                android:textColor="#666666"/>
+                android:textColor="@color/text_secondary"/>
 
         </LinearLayout>
 
-        <Button
-            android:id="@+id/btnEditProfile"
+        <!-- Button container -->
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Edit Profile"
-            android:padding="16dp"
-            android:backgroundTint="#2196F3"
-            android:layout_marginBottom="16dp"/>
+            android:orientation="vertical"
+            android:gravity="center_horizontal"
+            android:layout_marginTop="16dp">
 
-        <Button
-            android:id="@+id/btnBack"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Back"
-            android:backgroundTint="#757575"/>
+            <Button
+                android:id="@+id/btnEditProfile"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:text="Edit Profile"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:background="@drawable/button_primary"
+                android:textColor="@color/button_text"
+                android:layout_marginBottom="12dp"/>
+
+            <Button
+                android:id="@+id/btnBack"
+                android:layout_width="wrap_content"
+                android:layout_height="56dp"
+                android:text="Back"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:background="@drawable/button_secondary"
+                android:textColor="@color/button_text"/>
+        </LinearLayout>
 
     </LinearLayout>
 </ScrollView>

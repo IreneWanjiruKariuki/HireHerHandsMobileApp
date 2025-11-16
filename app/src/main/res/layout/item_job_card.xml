@@ -3,78 +3,128 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:padding="16dp"
-    android:background="#FFFFFF"
-    android:elevation="2dp"
-    android:layout_marginBottom="12dp">
+    android:padding="20dp"
+    android:elevation="4dp"
+    android:layout_marginHorizontal="16dp"
+    android:layout_marginVertical="12dp"
+    android:background="@drawable/card_background">
 
-    <TextView
-        android:id="@+id/tvJobTitle"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Job Title"
-        android:textStyle="bold"
-        android:textSize="18sp"
-        android:textColor="#000000"/>
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/tvJobTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Job Title"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:textColor="@color/text_primary"
+            android:textAppearance="?attr/textAppearanceHeadlineSmall"/>
+
+        <TextView
+            android:id="@+id/tvJobLocation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="Location: "
+            android:textSize="13sp"
+            android:textColor="@color/text_secondary"/>
+    </LinearLayout>
 
     <TextView
         android:id="@+id/tvJobDescription"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="16dp"
         android:text="Job Description"
-        android:textSize="14sp"/>
+        android:textSize="14sp"
+        android:textColor="@color/text_secondary"
+        android:lineSpacingMultiplier="1.5"/>
 
-    <TextView
-        android:id="@+id/tvJobLocation"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:text="Location: "
-        android:textSize="14sp"/>
+        android:orientation="horizontal"
+        android:layout_marginTop="16dp"
+        android:gravity="center">
 
-    <TextView
-        android:id="@+id/tvJobDate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:text="Date: "
-        android:textSize="14sp"/>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/tvJobDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:text="Date: "
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:textColor="@color/text_primary"/>
+        </LinearLayout>
 
-    <TextView
-        android:id="@+id/tvJobBudget"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:text="Budget: "
-        android:textSize="16sp"
-        android:textStyle="bold"
-        android:textColor="#4CAF50"/>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tvJobBudget"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:text="Budget: "
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:textColor="@color/success"/>
+
+        </LinearLayout>
+    </LinearLayout>
 
     <TextView
         android:id="@+id/tvJobStatus"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="16dp"
         android:text="Status: "
-        android:textSize="14sp"
-        android:textColor="#2196F3"/>
+        android:textSize="13sp"
+        android:textStyle="bold"
+        android:textColor="@color/primary"/>
 
-    <TextView
-        android:id="@+id/tvCustomerName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="Customer: "
-        android:textSize="14sp"
-        android:textStyle="bold"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        android:background="@color/border"/>
 
-    <TextView
-        android:id="@+id/tvCustomerEmail"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:text="Email: "
-        android:textSize="14sp"/>
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tvCustomerName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="Customer: "
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:textColor="@color/text_primary"/>
+
+        <TextView
+            android:id="@+id/tvCustomerEmail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="Email: "
+            android:textSize="13sp"
+            android:textColor="@color/text_secondary"/>
+    </LinearLayout>
 
 </LinearLayout>
